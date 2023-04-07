@@ -19,13 +19,13 @@ class _CharacterEndpoint implements CharacterEndpoint {
   String? baseUrl;
 
   @override
-  Future<ResponseDto> getCharacters() async {
+  Future<ResponseChar> getCharacters(offset) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'offset': offset};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ResponseDto>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponseChar>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -37,7 +37,30 @@ class _CharacterEndpoint implements CharacterEndpoint {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ResponseDto.fromJson(_result.data!);
+    final value = ResponseChar.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ResponseCharComic> getCharactersStories(id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponseCharComic>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/characters/${id}/stories',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ResponseCharComic.fromJson(_result.data!);
     return value;
   }
 

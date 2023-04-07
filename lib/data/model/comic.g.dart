@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'character.dart';
+part of 'comic.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Character _$CharacterFromJson(Map<String, dynamic> json) => Character(
+Comic _$ComicFromJson(Map<String, dynamic> json) => Comic(
       id: json['id'] as int?,
-      name: json['name'] as String?,
+      title: json['title'] as String?,
       resourceURI: json['resourceURI'] as String?,
-    )
-      ..thumbnail = json['thumbnail'] == null
+      thumbnail: json['thumbnail'] == null
           ? null
-          : ImageMarvel.fromJson(json['thumbnail'] as Map<String, dynamic>)
-      ..description = json['description'] as String?;
+          : ImageMarvel.fromJson(json['thumbnail'] as Map<String, dynamic>),
+      description: json['description'] as String?,
+    );
 
-Map<String, dynamic> _$CharacterToJson(Character instance) => <String, dynamic>{
+Map<String, dynamic> _$ComicToJson(Comic instance) => <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
+      'title': instance.title,
       'resourceURI': instance.resourceURI,
       'thumbnail': instance.thumbnail?.toJson(),
       'description': instance.description,

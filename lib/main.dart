@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:marvel_app/presentation/screen/home_screen.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:marvel_app/data/model_hive/character_model_hive.dart';
+import 'package:marvel_app/presentation/navigation/bottom_nav_bar.dart';
 import 'infrastructure/injections/injector.dart';
 
 void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(CharacterModelHiveAdapter());
+  Hive.registerAdapter(ImageMarvelAdapter());
   final GetIt getIt = initializeInjections();
   await getIt.allReady();
   runApp(const MyApp());
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const BottomNavBar(),
     );
   }
 }
